@@ -1,0 +1,54 @@
+{
+    "patches": [
+        {
+            "label": "2025-10-28_13-37-31",
+            "content": "@@ -357,33 +357,33 @@\n %3E int:%0A        i\n-f\n+n\n  self.__dinheiro\n",
+            "lines": "84"
+        },
+        {
+            "label": "2025-10-28_13-37-48",
+            "content": "@@ -242,26 +242,24 @@\n return self.\n-__\n dinheiro%0A%0A  \n@@ -2424,522 +2424,4 @@\n e = \n-input().strip()%0A            if line == %22%22:%0A                continue%0A%0A            print(f%22$%7Bline%7D%22)%0A            ui = line.split()%0A            cmd = ui%5B0%5D%0A%0A            if cmd == %22end%22:%0A                break %0A            %0A            elif cmd == %22show%22:%0A                print(moto)%0A%0A            elif cmd == %22setDriver%22:%0A                moto.setDriver(Pessoa(ui%5B1%5D, int(ui%5B2%5D)))%0A%0A            elif cmd == %22setPass%22:%0A                moto.setPass(Pessoa(ui%5B1%5D, int(ui%5B2%5D))) %0A%0A            elif cmf == %22drive%22:%0A                \n",
+            "lines": "84"
+        },
+        {
+            "label": "2025-10-28_13-43-22",
+            "content": "@@ -2357,17 +2357,16 @@\n f main()\n-:\n %0A    mot\n@@ -2924,8 +2924,24 @@\n drive%22:%0A\n+                \n",
+            "lines": "105"
+        },
+        {
+            "label": "2025-10-28_13-43-29",
+            "content": "@@ -2915,360 +2915,18 @@\n f cm\n-d == %22drive%22:%0A                moto.drive(int(ui%5B1%5D))%0A            %0A            elif cmd == %22leavePass%22:%0A                moto.leavePass()%0A            %0A            else: %0A                print(f%22fail: unknown command %7Bcmd%7D%22)%0A%0A        except EOFError:%0A            break%0A        except Exception as e:%0A            print(f%22fail: processing error: %7Be%7D%22)%0A%0A%0Amain()\n+f == %22drive%22:\n %0A\n",
+            "lines": "104"
+        },
+        {
+            "label": "2025-10-28_13-45-58",
+            "content": "@@ -282,19 +282,15 @@\n self\n-,\n+:\n  valor\n-:int\n ):%0A \n",
+            "lines": "119"
+        },
+        {
+            "label": "2025-10-28_13-47-23",
+            "content": "@@ -3267,34 +3267,8 @@\n %22)%0A%0A\n-if __name__ == %22__main__%22:\n %0Amai\n",
+            "lines": "119"
+        },
+        {
+            "label": "2025-10-28_13-47-33",
+            "content": "@@ -3263,16 +3263,42 @@\n  %7Be%7D%22)%0A%0A\n+if __name__ == %22__main__%22:\n %0Amain()%0A\n",
+            "lines": "119"
+        },
+        {
+            "label": "2025-10-28_13-47-43",
+            "content": "@@ -203,17 +203,17 @@\n  def get\n-D\n+d\n inheiro(\n@@ -424,25 +424,25 @@\n (%22fail: Pass\n-e\n+a\n nger does no\n@@ -2118,25 +2118,25 @@\n ista  else %22\n-N\n+n\n one%22%0A       \n",
+            "lines": "119"
+        },
+        {
+            "label": "2025-10-28_13-50-58",
+            "content": "@@ -2378,18 +2378,16 @@\n o = Moto\n-()\n %0A    whi\n",
+            "lines": "119"
+        },
+        {
+            "label": "2025-10-28_13-51-14",
+            "content": "class Pessoa:\n    def __init__(self, nome: str, dinheiro: int):\n        self.__nome: str = nome\n        self.__dinheiro: int = dinheiro\n    \n    def getNome(self) -> str:\n        return self.__nome\n\n    def getDinheiro(self) -> int:\n        return self.__dinheiro\n\n    def receber(self, valor:int):\n        self.__dinheiro += valor \n\n    def pagar(self, valor) -> int:\n        if self.__dinheiro < valor:\n             print(\"fail: Passenger does not have enough money\")\n             valor_pago = self.__dinheiro\n             self.__dinheiro = 0\n             return valor_pago\n        self.__dinheiro -= valor\n        return valor \n\n    def toString(self) -> str:\n        return f\"{self.__nome}:{self.__dinheiro}\"\n\n    def __str__(self) -> str:\n        return self.toString()\n\nclass Moto:\n    def __init__(self):\n        self.__custo: int = 0\n        self.__motorista: Pessoa | None = None \n        self.__passageiro: Pessoa | None = None\n\n    def setDriver(self, motorista: Pessoa):\n        self.__motorista = motorista \n\n    def setPass(self, passageiro: Pessoa):\n        if self.__motorista is None:\n            print(\"fail: No driver on the bike\")\n            return\n\n        if self.__passageiro is not None:\n            print(\"fail: Already a passenger on the bike\")\n            return\n        self.__passageiro = passageiro\n        self.__custo = 0\n\n    def drive(self, km: int):\n        if self.__motorista is None: \n            print(\"fail: No driver on the bike\")\n            return \n\n        if self.__passageiro is None: \n            print(\"fail: No passenger on the bike\")\n            return\n\n        self.__custo += km\n\n    def leavePass(self):\n        if self.__passageiro is None: \n            print(\"fail: No passenger to leave\")\n            return\n        valor_pago = self.__passageiro.pagar(self.__custo)\n        self.__motorista.receber(self.__custo)\n        passageiro_final = self.__passageiro.toString()\n        print(f\"{passageiro_final} left\")\n        self.__passageiro = None\n        self.__custo = 0\n\n    def toString(self) -> str:\n        driver_str = str(self.__motorista) if self.__motorista  else \"None\"\n        pass_str = str(self.__passageiro) if self.__passageiro else \"None\"\n        return f\"Cost: {self.__custo}, Driver: {driver_str}, Passenger: {pass_str}\"\n\n    def __str__(self) -> str: \n        return self.toString()\n\ndef main():\n    moto = Moto()\n    while True:\n        try:\n            line = input().strip()\n            if line == \"\":\n                continue\n\n            print(f\"${line}\")\n            ui = line.split()\n            cmd = ui[0]\n\n            if cmd == \"end\":\n                break \n            \n            elif cmd == \"show\":\n                print(moto)\n\n            elif cmd == \"setDriver\":\n                moto.setDriver(Pessoa(ui[1], int(ui[2])))\n\n            elif cmd == \"setPass\":\n                moto.setPass(Pessoa(ui[1], int(ui[2]))) \n\n            elif cmd == \"drive\":\n                moto.drive(int(ui[1]))\n            \n            elif cmd == \"leavePass\":\n                moto.leavePass()\n            \n            else: \n                print(f\"fail: unknown command {cmd}\")\n\n        except EOFError:\n            break\n        except Exception as e:\n            print(f\"fail: processing error: {e}\")\n\n\nmain()\n",
+            "lines": "119"
+        }
+    ]
+}

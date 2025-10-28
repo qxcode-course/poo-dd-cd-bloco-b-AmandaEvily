@@ -1,0 +1,30 @@
+version: '0.2'
+sources:
+- database: local
+  link: ''
+  cache_path: ''
+  cache_timestamp: ''
+  filters: null
+- database: poo
+  link: https://github.com/qxcodepoo/arcade/blob/master/Readme.md
+  cache_path: /workspaces/poo-dd-cd-bloco-b-AmandaEvily/myrep/.tko/cache/poo.md
+  cache_timestamp: '2025-10-28 15:37:59'
+  filters:
+  - acesso
+  - simples
+expanded:
+- poo@campanha-principal
+- poo@bloco_b-modificadores-de-acesso
+- poo@bloco_b-agregação-simples
+tasks:
+  poo@motoca: '{rate:100, human:s, iagen:s, alone:10}'
+  poo@grafite: '{rate:100, human:s, iagen:s, alone:10}'
+  poo@motouber: '{rate:100, human:s, iagen:s}'
+flags:
+  quests: 2
+  tracks: 2
+  tasks: 2
+  graph: 1
+  xray: 0
+lang: py
+selected: poo@charger

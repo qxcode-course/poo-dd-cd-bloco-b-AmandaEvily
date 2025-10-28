@@ -1,0 +1,44 @@
+{
+    "patches": [
+        {
+            "label": "2025-10-28_16-08-20",
+            "content": "@@ -1372,33 +1372,33 @@\n carregador is no\n-t\n+r\n  None:%0A         \n",
+            "lines": "171"
+        },
+        {
+            "label": "2025-10-28_16-09-42",
+            "content": "@@ -1378,32 +1378,33 @@\n ador is not None\n+:\n %0A            pri\n",
+            "lines": "171"
+        },
+        {
+            "label": "2025-10-28_16-09-52",
+            "content": "@@ -1378,33 +1378,32 @@\n ador is not None\n-:\n %0A            pri\n",
+            "lines": "171"
+        },
+        {
+            "label": "2025-10-28_16-10-03",
+            "content": "@@ -4149,17 +4149,17 @@\n   print(\n-n\n+b\n b.show()\n@@ -4287,18 +4287,16 @@\n turn_off\n-()\n %0A       \n@@ -4504,16 +4504,26 @@\n charger(\n+int(ui%5B1%5D)\n )%0A      \n",
+            "lines": "171"
+        },
+        {
+            "label": "2025-10-28_16-13-19",
+            "content": "@@ -2466,33 +2466,33 @@\n carregador is no\n-t\n+r\n  None%0A        te\n@@ -3591,16 +3591,17 @@\n : ligado\n+r\n  por %7Bse\n",
+            "lines": "171"
+        },
+        {
+            "label": "2025-10-28_16-15-41",
+            "content": "@@ -2472,33 +2472,32 @@\n ador is not None\n-:\n %0A        tem_bat\n",
+            "lines": "171"
+        },
+        {
+            "label": "2025-10-28_16-17-01",
+            "content": "@@ -2472,32 +2472,33 @@\n ador is not None\n+:\n %0A        tem_bat\n",
+            "lines": "171"
+        },
+        {
+            "label": "2025-10-28_16-17-13",
+            "content": "class Charger:\n    def __init__(self, potencia: int):\n        self.__potencia: int = potencia\n    \n    def getPotencia(self) -> int:\n        return self.__potencia\n\n    def toString(self) -> str:\n        return f\"{self.__potencia}W\"\n\n    def __str__(self) -> str:\n        return self.toString()\n\nclass Battery:\n    def __init__(self, capacidade: int):\n        self.__capacidade: int = capacidade\n        self.__carga: int = capacidade\n\n    def getCarga(self) -> int: \n        return self.__carga\n\n    def getCapacidade(self) -> int: \n        return self.__capacidade\n\n    def charge(self, valor: int):\n        self.__carga += valor\n        if self.__carga > self.__capacidade:\n            self.__carga = self.__capacidade\n\n    def discharge(self, valor: int) -> bool:\n        if self.__carga == 0:\n            return True\n        self.__carga -= valor\n        if self.__carga <= 0:\n            self.__carga = 0\n            return True\n        return False\n\n    def toString(self) -> str:\n        return f\"{self.__carga}/{self.__capacidade}\"\n\n    def __str__(self) -> str:\n        return self.toString()\n\nclass Notebook:\n    def __init__(self):\n        self.__ligado: bool = False\n        self.__tempo_uso: int = 0\n        self.__carregador: Charger | None = None\n        self.__bateria: Battery | None = None \n\n    def set_charger(self, potencia: int):\n        if self.__carregador is not None:\n            print(\"fail: careggador j\u00e1 conectado\")\n            return\n        self.__carregador = Charger(potencia)\n\n    def rm_charger(self):\n        if self.__carregador is None:\n            print(\"fail: Sem carregador\")\n            return \n        print(f\"Removido {self.__carregador.toString()}\")\n        self.__carregador = None\n        if self.__ligado:\n            if self.__bateria is None or self.__bateria.getCarga() == 0:\n                self.turn_off()\n\n    def set_battery(self, capacidade: int):\n        if self.__bateria is not None:\n            print(\"fail: bateria j\u00e1 conectada\")\n            return\n        self.__bateria = Battery(capacidade)\n\n    def rm_battery(self):\n        if self.__bateria is None: \n            print(\"fail: Sem bateria\")\n            return \n        print(f\"Removido {self.__bateria.toString()}\")\n        self.__bateria = None\n        if self.__ligado:\n            if self.__carregador is None: \n                self.turn_off()\n\n    def turn_on(self):\n        if self.__ligado:\n            return\n        tem_carregador = self.__carregador is not None\n        tem_bateria = (self.__bateria is not None and self.__bateria.getCarga() > 0)\n        if tem_carregador or tem_bateria:\n            self.__ligado = True\n            self.__tempo_uso = 0\n        else: \n            print(\"fail: n\u00e3o foi poss\u00edvel ligar\")\n\n    def turn_off(self):\n        self.__ligado = False \n\n    def use(self, tempo: int):\n        if not self.__ligado:\n            print(\"fail: desligado\")\n            return\n        self.__tempo_uso += tempo\n        tem_carregador = self.__carregador is not None\n        tem_bateria = self.__bateria is not None\n\n        if tem_bateria and tem_carregador:\n            potencia = self.__carregador.getPotencia()\n            self.__bateria.charge(potencia * tempo)\n\n        elif tem_bateria:\n            descarregou = self.__bateria.discharge(tempo)\n            if descarregou:\n                print(\"fail: descarregou\")\n                self.turn_off()\n\n        elif tem_carregador:\n            pass\n\n    def show(self) -> str:\n        if not self.__ligado:\n            status = \"Notebook: desligado\"\n        else:\n            status = f\"Notebook: ligado por {self.__tempo_uso} min\"\n\n        if self.__carregador is not None:\n            status += f\", Bateria {self.__bateria.toString()}\"\n        return status\n\n    def __str__(self) -> str:\n        return self.show()\n\ndef main():\n    nb = Notebook ()\n    while True:\n        try: \n            line = input().strip()\n            if line == \"\":\n                continue\n\n            print(f\"${line}\")\n            ui = line.split()\n            cmd = ui[0]\n\n            if cmd == \"end\":\n                break\n            elif cmd == \"show\":\n                print(nb.show())\n            elif cmd == \"turn_on\":\n                nb.turn_on()\n            elif cmd == \"turn_off\":\n                nb.turn_off()\n            elif cmd == \"use\":\n                nb.use(int(ui[1]))\n            elif cmd == \"set_charger\":\n                nb.set_charger(int(ui[1]))\n            elif cmd == \"rm_charger\":\n                nb.rm_charger()\n            elif cmd == \"set_battery\":\n                nb.set_battery(int(ui[1]))\n            elif cmd == \"rm_battery\":\n                nb.rm_battery()\n            else: \n                print (f\"fail: unknown command {cmd}\")\n\n        except EOFError:\n            break\n        except Exception as e:\n            print(f\"fail: processing error: {e}\")\n\nif __name__ == \"__main__\":\n    main()    \n",
+            "lines": "171"
+        }
+    ]
+}
